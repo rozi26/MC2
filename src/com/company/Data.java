@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.swing.*;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -677,7 +678,8 @@ public class Data {
 
     public static String getFileLocaiton()
     {
-        return "D:\\programing\\Data\\javaMC\\";
+        return "";
+        //return "D:\\programing\\Data\\javaMC\\";
     }
     public static double round(double num, int after)
     {
@@ -695,4 +697,38 @@ public class Data {
         // System.out.println("send report of from = " + _from + " to = " + _to + " eat = " + _eat);
         return Character.toString(_from) + _to + _eat;
     }*/
+
+    public static String getDefaultSaveLocation()
+    {
+        String path = System.getProperty("user.home") + "\\IddoRozenblumMCDATA";
+        File file = new File(path);
+        if(!file.exists())
+            file.mkdir();
+        int index = 1;
+        while (index < 1000)
+        {
+            File f = new File(path + "\\model" + index);
+            if(!f.exists())
+            {
+                f.mkdir();
+                return f.getPath();
+            }
+            index++;
+        }
+        System.out.println("the default file creator is limited to 1,000 models so theres no room for new model");
+        return "";
+    }
+
+    private static int GAMEMCSTARTER = 1;
+    public static void setGAMEMCSTARTER(int to)
+    {
+        if(to > -2 && to < 2)
+            GAMEMCSTARTER = to;
+        else
+            System.out.println("game mc starter can be:\n\t-1: never start\n\t0: random\n\t1: always start");
+    }
+    public static int getGAMEMCSTARTER()
+    {
+        return GAMEMCSTARTER;
+    }
 }

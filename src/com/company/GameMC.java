@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class GameMC {
-    final int start = -1;
+    final int start = Data.getGAMEMCSTARTER();
 
     private String name;
     private Game game;

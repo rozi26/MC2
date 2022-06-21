@@ -575,7 +575,7 @@ public class NeuralNetwork {
 
 
     public void exportModel(String name, long startTime,int runs, String against, int runCounts, double acraccy, boolean sigmoid) throws IOException {
-        String loc = "D:\\programing\\Data\\javaMC\\" + name;
+        String loc = Data.getFileLocaiton() + name;
         File folder = new File(loc);
         //System.out.println("export in D:\\programing\\Data\\javaMC\\" + name);
         if(folder.exists())
@@ -601,6 +601,7 @@ public class NeuralNetwork {
         File f = new File(loc + "\\model.txt");
         if(f.exists())
             f.delete();
+        System.out.println(f.getPath());
         f.createNewFile();
         FileWriter writer = new FileWriter(f);
         writer.write(stringBuilder.toString());

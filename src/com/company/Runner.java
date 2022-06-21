@@ -9,8 +9,7 @@ import java.util.Random;
 
 public class Runner {
     public static void main(String[] args) throws IOException {
-        ImageMC m = new ImageMC("number1",new int[]{(28*28),256,16,10},true, "D:\\shit\\download\\mnist_784_csv.csv",28);
-        m.trainGrid();
+
     }
     public Runner()
     {

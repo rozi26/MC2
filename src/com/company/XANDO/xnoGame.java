@@ -1,10 +1,12 @@
 package com.company.XANDO;
 
+import com.company.Data;
 import com.company.Game;
 import com.company.GameMove;
 
 import javax.swing.*;
 import java.util.Random;
+import java.util.Scanner;
 
 public class xnoGame extends Game {
 
@@ -129,7 +131,37 @@ public class xnoGame extends Game {
         }
         System.out.println();
     }
-
-
+    public void playAgainstModel(xnoMC x)
+    {
+        int turn = (Data.getGAMEMCSTARTER() == 0)?(Data.onIn(2)?1:-1):Data.getGAMEMCSTARTER();
+        resetGame(turn);
+        int lose;
+        while((lose = checkWin()) == 0)
+        {
+            printBoard();
+            if(turn == 1)
+                doMove(x.getModelMove(this));
+            else
+            {
+                while (true)
+                {
+                    System.out.print("enter your move: ");
+                    Scanner scanner = new Scanner(System.in);
+                    final int to = scanner.nextInt();
+                    if(board[to] == 0)
+                    {
+                        doMove(new xnoMove(scanner.nextInt()));
+                        break;
+                    }
+                    else
+                        System.out.println("the square " + to + " is taken");
+                }
+            }
+            turn = -turn;
+        }
+        System.out.println("\nGAME OVER:");
+        printBoard();
+        System.out.println(lose == 2?"the game ended with draw":((lose == -1)?"you won":"the machine won"));
+    }
 
 }
